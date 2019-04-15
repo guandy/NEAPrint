@@ -1,0 +1,66 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="/scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="/scripts/neaprint.utils.js" type="text/javascript"></script>
+
+</head>
+<body>
+    <div> 
+        <input type="button"  id="printbase64" value="根据BASE64打印EXCEL"/>
+        <br />
+        <br />
+        <input type="button" id="showbase64" value="根据BASE64预览EXCEL" />
+        <br />
+        <br />
+        <input type="button" id="printurl" value="根据URL打印EXCEL" />
+        <br />
+        <br />
+        <input type="button" id="showurl" value="根据URL预览EXCEL" />
+    </div>
+</body>
+</html>
+<script>
+        $("#printbase64").click(function ()
+        {
+            $.ajax({
+                type: "POST",
+                url: "/Home/GetExcelBase64",
+                success: function (data)
+                {
+                    neaprint.utils.PrintBase64(data.Data, 1);
+                }
+            });
+        })
+
+        $("#showbase64").click(function ()
+        {
+            $.ajax({
+                type: "POST",
+                url: "/Home/GetExcelBase64",
+                success: function (data)
+                {
+                    neaprint.utils.PrintBase64(data.Data, 2);
+                }
+            });
+        })
+
+        $("#printurl").click(function ()
+        {
+            neaprint.utils.PrintUrl("http://localhost:51452/Content/print.xls", 1);
+        })
+
+        $("#showurl").click(function ()
+        {
+            neaprint.utils.PrintUrl("http://localhost:51452/Content/print.xls", 2);
+        })
+
+</script>
