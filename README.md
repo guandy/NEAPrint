@@ -6,6 +6,9 @@ NEAPrint是客户端代理打印软件
 NEAPrint的工作方式
   通过监听http的方式进行打印或预览
   
+  在线案例：
+  http://neaprint.mpqqweixin.com/ 
+  
 
 
 
