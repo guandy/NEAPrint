@@ -7,7 +7,7 @@ NEAPrint的工作方式
   通过监听http的方式进行打印或预览
   
   在线案例：
-  http://neaprint.mpqqweixin.com/ 
+  http://neaprint.mpqqweixin.com/home/index
   
 
 
