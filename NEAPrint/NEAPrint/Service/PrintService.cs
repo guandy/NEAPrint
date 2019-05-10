@@ -20,31 +20,44 @@ namespace NEAPrint
 {
     public class PrintService
     {
-        public CommonResult PrintExcelUrl(string url, string printType)
+        /// <summary>
+        /// 根据链接打印excel
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="printType"></param>
+        /// <param name="isOpenPrintDialog"></param>
+        /// <returns></returns>
+        public CommonResult PrintExcelUrl(string url, string printType, bool isOpenPrintDialog)
         {
             string path = Utils.NewExcelFullName();
             bool saveResult = Utils.UrlToFile(url, path);
             if (!saveResult)
                 return JResult.Error("下载文件失败");
 
-            var printResult = PrintFile(path, printType);
+            var printResult = PrintFile(path, printType, isOpenPrintDialog);
 
             return printResult;
         }
-
-        public CommonResult PrintExcelBase64(string excelBase64, string printType)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="excelBase64"></param>
+        /// <param name="printType"></param>
+        /// <param name="isOpenPrintDialog"></param>
+        /// <returns></returns>
+        public CommonResult PrintExcelBase64(string excelBase64, string printType, bool isOpenPrintDialog)
         {
             string path = Utils.NewExcelFullName();
             bool saveResult = Utils.Base64ToFile(excelBase64, path);
             if (!saveResult)
                 return JResult.Error("不是有效的base64数据");
 
-            var printResult = PrintFile(path, printType);
+            var printResult = PrintFile(path, printType, isOpenPrintDialog);
 
             return printResult;
         }
 
-        public CommonResult PrintFile(string filePath, string printType)
+        public CommonResult PrintFile(string filePath, string printType, bool isOpenPrintDialog)
         {
             if (!File.Exists(filePath))
                 return JResult.Error("文件不存在");
@@ -58,15 +71,23 @@ namespace NEAPrint
             }
             else
             {
-                var app = excel.Application;
-                app.WindowState = XlWindowState.xlNormal;
-                app.Width = app.Height = 0;
-                var dialogResult = app.Dialogs[XlBuiltInDialog.xlDialogPrint].Show();
-                app.Quit();
+                if (isOpenPrintDialog)
+                {
+                    var app = excel.Application;
+                    app.WindowState = XlWindowState.xlNormal;
+                    app.Width = app.Height = 0;
+                    var dialogResult = app.Dialogs[XlBuiltInDialog.xlDialogPrint].Show();
+                    app.Quit();
+                    excel.Close();
+                }
+                else
+                {
+                    excel.Application.Application.WindowState = XlWindowState.xlMaximized;
+                    excel.IsExcelAppVisibled = false;
+                    excel.Print();
+                }
             }
             Utils.DeleteExcel();
-            excel.Close();
-            //File.Delete(filePath);
             return JResult.Success();
         }
 

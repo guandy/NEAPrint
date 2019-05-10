@@ -61,17 +61,20 @@ namespace NEAPrint
             var controller = postDict["Controller"];
             CommonResult result = new CommonResult();
             var printFlag = string.Empty;
+            bool isOpenPrintDialog = false;
             switch (controller)
             {
                 case "print":
                     var base64 = postDict["FileBase64"];
                     printFlag = postDict["PrintFlag"];
-                    result = new PrintService().PrintExcelBase64(base64, printFlag);
+                    isOpenPrintDialog = postDict["IsOpenPrintDialog"] == "1";
+                    result = new PrintService().PrintExcelBase64(base64, printFlag, isOpenPrintDialog);
                     break;
                 case "printurl":
                     var fileUrl = postDict["FileUrl"];
                     printFlag = postDict["PrintFlag"];
-                    result = new PrintService().PrintExcelUrl(fileUrl, printFlag);
+                    isOpenPrintDialog = postDict["IsOpenPrintDialog"] == "1";
+                    result = new PrintService().PrintExcelUrl(fileUrl, printFlag, isOpenPrintDialog);
                     break;
                 case "getversion":
                     result = new PrintService().GetVersion();

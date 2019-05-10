@@ -53,14 +53,16 @@
             });
         })
 
+        var webhost = '@(ViewBag.WebHost)';
+
         $("#printurl").click(function ()
         {
-            neaprint.utils.PrintUrl("http://localhost:51452/Content/print.xls", 1);
+            neaprint.utils.PrintUrl(webhost+"Content/print.xls", 1);
         })
 
         $("#showurl").click(function ()
         {
-            neaprint.utils.PrintUrl("http://localhost:51452/Content/print.xls", 2);
+            neaprint.utils.PrintUrl(webhost + "/Content/print.xls", 2);
         })
 
 </script>

@@ -3,3 +3,11 @@
 ################################################################################
 
 /NEAPrint/NEAPrint/bin/Debug
+/NEAPrint/NEAPrint/obj/Debug
+/NEAPrint/.vs/NEAPrint/v14
+/NEAPrint/packages/Microsoft.Office.Interop.Excel.15.0.4795.1000
+/NEAPrintDemo/NEAPrintDemo/bin
+/NEAPrintDemo/NEAPrintDemo/obj
+/NEAPrintDemo/packages
+/NEAPrintDemo/.vs
+/NEAPrintDemo/NEAPrintDemo/Properties/PublishProfiles

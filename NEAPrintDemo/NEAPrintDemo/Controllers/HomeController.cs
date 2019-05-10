@@ -11,6 +11,7 @@ namespace NEAPrintDemo.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            ViewBag.WebHost = Request.Url.AbsoluteUri.Replace("/Home/Index","");
             return View();
         }
 
